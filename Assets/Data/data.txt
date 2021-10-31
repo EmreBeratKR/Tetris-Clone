@@ -1,0 +1,13 @@
+Level:1
+Best:0
+ShowGhost:True
+MusicVol:1
+SFXVol:1
+MusicType:0
+MoveRight:RightArrow
+MoveLeft:LeftArrow
+RotateRight:UpArrow
+RotateLeft:Z
+SoftDrop:DownArrow
+InstantDrop:Space
+HoldTetro:C

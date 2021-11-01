@@ -12,6 +12,7 @@ public class KeyBinder : MonoBehaviour
     public int bindIndex;
     public string lastBind;
     [SerializeField] KeyCode[] validKeys;
+    [SerializeField] KeyCode[] defaultBinding;
     public KeyCode[] bindings;
     public TextMeshProUGUI[] KeyBindTexts;
     public GameObject BindJammer;
@@ -140,6 +141,14 @@ public class KeyBinder : MonoBehaviour
                 }
                 KeyBindTexts[i-6].text = strKey;
             }
+        }
+    }
+
+    public void resetBindings()
+    {
+        for (int b = 0; b < bindings.Length; b++)
+        {
+            changeBinding(b, defaultBinding[b]);
         }
     }
 }

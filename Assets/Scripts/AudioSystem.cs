@@ -73,7 +73,7 @@ public class AudioSystem : MonoBehaviour
 
     void writeSounds()
     {
-        var datas = ds.read_data();
+        /* var datas = ds.read_data();
         string newData = "";
         for (int i = 0; i < datas.Length; i++)
         {
@@ -90,33 +90,45 @@ public class AudioSystem : MonoBehaviour
                 newData += datas[i] + "\n";
             }
         }
-        ds.write_data(newData.Substring(0, newData.Length - 1));
+        ds.write_data(newData.Substring(0, newData.Length - 1)); */
+
+        var lastData = ds.read_data();
+        lastData.sounds.musicVolume = Sliders[1].value;
+        lastData.sounds.sfxVolume = Sliders[0].value;
+        ds.write_data(lastData);
     }
 
     void readSounds()
     {
-        var datas = ds.read_data();
+        /* var datas = ds.read_data();
         float SFXVol = float.Parse(datas[4].Substring(7, datas[4].Length - 7));
-        float MusicVol = float.Parse(datas[3].Substring(9, datas[3].Length - 9));
-        Sliders[0].value = SFXVol;
-        Sliders[1].value = MusicVol;
+        float MusicVol = float.Parse(datas[3].Substring(9, datas[3].Length - 9)); */
+
+        var soundSettings = ds.read_data().sounds;
+
+        Sliders[0].value = soundSettings.sfxVolume;
+        Sliders[1].value = soundSettings.musicVolume;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             foreach (var music in musics)
             {
-                music.GetComponent<AudioSource>().volume = MusicVol;
+                music.GetComponent<AudioSource>().volume = soundSettings.musicVolume;
             }
         }    
         foreach (var sfx in sfxs)
         {
-            sfx.volume = SFXVol;
+            sfx.volume = soundSettings.sfxVolume;
         }
     }
 
     void readType()
     {
-        string data = ds.read_data()[5];
-        int musicType = System.Convert.ToInt32(data.Substring(10, data.Length - 10));
+        /* string data = ds.read_data()[5];
+        int musicType = System.Convert.ToInt32(data.Substring(10, data.Length - 10)); */
+
+
+        int musicType = ds.read_data().sounds.musicType;
+        
         currentMusic = musicType;
         MusicTypeText.text = "Type " + (musicType + 1).ToString();
         if (musicType == 0)

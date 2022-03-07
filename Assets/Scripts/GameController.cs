@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         var ds = GameObject.FindWithTag("Background").GetComponent<DataStorer>();
-        Start_Level = System.Convert.ToInt32(ds.read_data()[0].Substring(6));
+        Start_Level = ds.read_data().level;
         Level = Start_Level;
         var tetro = GameObject.FindWithTag("Tetromino");
         last_x = Mathf.RoundToInt(tetro.transform.position.x);

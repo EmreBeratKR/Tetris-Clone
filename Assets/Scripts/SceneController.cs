@@ -43,8 +43,13 @@ public class SceneController : MonoBehaviour
         }
         DataStorer ds = DataStorer.GetComponent<DataStorer>();
         gt = GhostToggle.GetComponent<Toggle>();
+        
         var datas = ds.read_data();
-        string data = datas[2].Substring(10, datas[2].Length - 10);
+
+        showGhost = datas.showGhost;
+        gt.isOn = datas.showGhost;
+
+        /* string data = datas[2].Substring(10, datas[2].Length - 10);
         if (data == "True")
         {
             showGhost = true;
@@ -54,7 +59,7 @@ public class SceneController : MonoBehaviour
         {
             showGhost = false;
             gt.isOn = false;
-        }
+        } */
     }
 
     void Update()
@@ -130,7 +135,9 @@ public class SceneController : MonoBehaviour
     {
         var ds = GameObject.FindWithTag("Main Menu").GetComponent<DataStorer>();
         var datas = ds.read_data();
-        string newData = "";
+        datas.level = Level;
+        ds.write_data(datas);
+        /* string newData = "";
         for (int i = 0; i < datas.Length; i++)
         {
             if (i == 0)
@@ -142,7 +149,7 @@ public class SceneController : MonoBehaviour
                 newData += datas[i] + "\n";
             }
         }
-        ds.write_data(newData.Substring(0, newData.Length - 1));
+        ds.write_data(newData.Substring(0, newData.Length - 1)); */
         SceneManager.LoadScene(1);
     }
 
@@ -225,7 +232,12 @@ public class SceneController : MonoBehaviour
         }
         DataStorer ds = DataStorer.GetComponent<DataStorer>();
         var datas = ds.read_data();
-        string newData = "";
+
+        datas.showGhost = showGhost;
+        ds.write_data(datas);
+
+
+        /* string newData = "";
         for (int i = 0; i < datas.Length; i++)
         {
             if (i == 2)
@@ -237,7 +249,7 @@ public class SceneController : MonoBehaviour
                 newData += datas[i] + "\n";
             }
         }
-        ds.write_data(newData.Substring(0, newData.Length - 1));
+        ds.write_data(newData.Substring(0, newData.Length - 1)); */
     }
 
     public void upperType()
@@ -251,7 +263,11 @@ public class SceneController : MonoBehaviour
             TypeButtons[1].SetActive(false);
         }
         var datas = ds.read_data();
-        string newData = "";
+
+        datas.sounds.musicType = msc.currentMusic;
+        ds.write_data(datas);
+
+        /* string newData = "";
         for (int i = 0; i < datas.Length; i++)
         {
             if (i == 5)
@@ -263,7 +279,7 @@ public class SceneController : MonoBehaviour
                 newData += datas[i] + "\n";
             }
         }
-        ds.write_data(newData.Substring(0, newData.Length - 1));
+        ds.write_data(newData.Substring(0, newData.Length - 1)); */
     }
 
     public void lowerType()
@@ -277,7 +293,11 @@ public class SceneController : MonoBehaviour
             TypeButtons[0].SetActive(false);
         }
         var datas = ds.read_data();
-        string newData = "";
+
+        datas.sounds.musicType = msc.currentMusic;
+        ds.write_data(datas);
+
+        /* string newData = "";
         for (int i = 0; i < datas.Length; i++)
         {
             if (i == 5)
@@ -289,7 +309,7 @@ public class SceneController : MonoBehaviour
                 newData += datas[i] + "\n";
             }
         }
-        ds.write_data(newData.Substring(0, newData.Length - 1));
+        ds.write_data(newData.Substring(0, newData.Length - 1)); */
     }
     
 
@@ -389,11 +409,13 @@ public class SceneController : MonoBehaviour
         var gc = GameObject.FindWithTag("Background").GetComponent<GameController>();
         Scores[0].text = "Your Score:\n" + gc.Score.ToString();
         var ds = GameObject.FindWithTag("Background").GetComponent<DataStorer>();
-        int last_best = System.Convert.ToInt32(ds.read_data()[1].Substring(5));
+        //int last_best = System.Convert.ToInt32(ds.read_data()[1].Substring(5));
+        var datas = ds.read_data();
+        int last_best = datas.bestScore;
         bool is_new;
         if (gc.Score > last_best)
         {
-            var datas = ds.read_data();
+            /* var datas = ds.read_data();
             string newData = "";
             for (int i = 0; i < datas.Length; i++)
             {
@@ -406,7 +428,11 @@ public class SceneController : MonoBehaviour
                     newData += datas[i] + "\n";
                 }
             }
-            ds.write_data(newData.Substring(0, newData.Length - 1));
+            ds.write_data(newData.Substring(0, newData.Length - 1)); */
+
+            datas.bestScore = gc.Score;
+            ds.write_data(datas);
+
             Scores[1].text = "Your Best:\n" + gc.Score.ToString();
             is_new = true;
         }

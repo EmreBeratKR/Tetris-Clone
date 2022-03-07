@@ -9,23 +9,12 @@ public class DataStorer : MonoBehaviour
     
     public void write_data(SettingsData data)
     {
-        /* StreamWriter writer = new StreamWriter(path, false);
-        writer.Write(data);
-        writer.Close(); */
-
-
         string jsonData = JsonUtility.ToJson(data);
         File.WriteAllText(path, jsonData);
     }
 
     public SettingsData read_data()
     {
-        /* StreamReader reader = new StreamReader(path);
-        string[] data = reader.ReadToEnd().Split(char.Parse("\n"));
-        reader.Close();
-        return data; */
-
-
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);

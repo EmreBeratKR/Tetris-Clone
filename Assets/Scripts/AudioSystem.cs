@@ -73,25 +73,6 @@ public class AudioSystem : MonoBehaviour
 
     void writeSounds()
     {
-        /* var datas = ds.read_data();
-        string newData = "";
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (i == 3)
-            {
-                newData += "MusicVol:" + Sliders[1].value + "\n";
-            }
-            else if (i == 4)
-            {
-                newData += "SFXVol:" + Sliders[0].value + "\n";
-            }
-            else
-            {
-                newData += datas[i] + "\n";
-            }
-        }
-        ds.write_data(newData.Substring(0, newData.Length - 1)); */
-
         var lastData = ds.read_data();
         lastData.sounds.musicVolume = Sliders[1].value;
         lastData.sounds.sfxVolume = Sliders[0].value;
@@ -100,10 +81,6 @@ public class AudioSystem : MonoBehaviour
 
     void readSounds()
     {
-        /* var datas = ds.read_data();
-        float SFXVol = float.Parse(datas[4].Substring(7, datas[4].Length - 7));
-        float MusicVol = float.Parse(datas[3].Substring(9, datas[3].Length - 9)); */
-
         var soundSettings = ds.read_data().sounds;
 
         Sliders[0].value = soundSettings.sfxVolume;
@@ -123,10 +100,6 @@ public class AudioSystem : MonoBehaviour
 
     void readType()
     {
-        /* string data = ds.read_data()[5];
-        int musicType = System.Convert.ToInt32(data.Substring(10, data.Length - 10)); */
-
-
         int musicType = ds.read_data().sounds.musicType;
         
         currentMusic = musicType;

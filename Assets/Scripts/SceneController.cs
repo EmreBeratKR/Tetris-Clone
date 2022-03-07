@@ -48,18 +48,6 @@ public class SceneController : MonoBehaviour
 
         showGhost = datas.showGhost;
         gt.isOn = datas.showGhost;
-
-        /* string data = datas[2].Substring(10, datas[2].Length - 10);
-        if (data == "True")
-        {
-            showGhost = true;
-            gt.isOn = true;
-        }
-        else if (data == "False")
-        {
-            showGhost = false;
-            gt.isOn = false;
-        } */
     }
 
     void Update()
@@ -137,19 +125,7 @@ public class SceneController : MonoBehaviour
         var datas = ds.read_data();
         datas.level = Level;
         ds.write_data(datas);
-        /* string newData = "";
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (i == 0)
-            {
-                newData += "Level:" + Level.ToString() + "\n";
-            }
-            else
-            {
-                newData += datas[i] + "\n";
-            }
-        }
-        ds.write_data(newData.Substring(0, newData.Length - 1)); */
+    
         SceneManager.LoadScene(1);
     }
 
@@ -230,26 +206,12 @@ public class SceneController : MonoBehaviour
                 ts.Spawn_Ghost();
             }
         }
+
         DataStorer ds = DataStorer.GetComponent<DataStorer>();
         var datas = ds.read_data();
 
         datas.showGhost = showGhost;
         ds.write_data(datas);
-
-
-        /* string newData = "";
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (i == 2)
-            {
-                newData += "ShowGhost:" + showGhost.ToString() + "\n";
-            }
-            else
-            {
-                newData += datas[i] + "\n";
-            }
-        }
-        ds.write_data(newData.Substring(0, newData.Length - 1)); */
     }
 
     public void upperType()
@@ -266,20 +228,6 @@ public class SceneController : MonoBehaviour
 
         datas.sounds.musicType = msc.currentMusic;
         ds.write_data(datas);
-
-        /* string newData = "";
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (i == 5)
-            {
-                newData += "MusicType:" + msc.currentMusic.ToString() + "\n";
-            }
-            else
-            {
-                newData += datas[i] + "\n";
-            }
-        }
-        ds.write_data(newData.Substring(0, newData.Length - 1)); */
     }
 
     public void lowerType()
@@ -296,20 +244,6 @@ public class SceneController : MonoBehaviour
 
         datas.sounds.musicType = msc.currentMusic;
         ds.write_data(datas);
-
-        /* string newData = "";
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (i == 5)
-            {
-                newData += "MusicType:" + msc.currentMusic.ToString() + "\n";
-            }
-            else
-            {
-                newData += datas[i] + "\n";
-            }
-        }
-        ds.write_data(newData.Substring(0, newData.Length - 1)); */
     }
     
 
@@ -409,27 +343,11 @@ public class SceneController : MonoBehaviour
         var gc = GameObject.FindWithTag("Background").GetComponent<GameController>();
         Scores[0].text = "Your Score:\n" + gc.Score.ToString();
         var ds = GameObject.FindWithTag("Background").GetComponent<DataStorer>();
-        //int last_best = System.Convert.ToInt32(ds.read_data()[1].Substring(5));
         var datas = ds.read_data();
         int last_best = datas.bestScore;
         bool is_new;
         if (gc.Score > last_best)
         {
-            /* var datas = ds.read_data();
-            string newData = "";
-            for (int i = 0; i < datas.Length; i++)
-            {
-                if (i == 1)
-                {
-                    newData += "Best:" + gc.Score.ToString() + "\n";
-                }
-                else
-                {
-                    newData += datas[i] + "\n";
-                }
-            }
-            ds.write_data(newData.Substring(0, newData.Length - 1)); */
-
             datas.bestScore = gc.Score;
             ds.write_data(datas);
 
@@ -451,7 +369,6 @@ public class SceneController : MonoBehaviour
 
     public void exit_game()
     {
-        Debug.Log("Oyundan Çıkıldı!");
         Application.Quit();
     }
 }

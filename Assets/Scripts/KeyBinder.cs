@@ -61,26 +61,6 @@ public class KeyBinder : MonoBehaviour
 
     void changeBinding(int index, KeyCode key)
     {
-        /* string strKey = key.ToString();
-        var datas = dataStorer.read_data();
-        string newData = "";
-        for (int i = 0; i < datas.Length; i++)
-        {
-            if (i == index + 6)
-            {
-                newData += datas[i].Split(char.Parse(":"))[0] + ":" + strKey + "\n";
-            }
-            else
-            {
-                newData += datas[i] + "\n";
-            }
-        }
-        dataStorer.write_data(newData.Substring(0, newData.Length - 1));
-        if (strKey.Length > 5 && strKey.Substring(0, 5) == "Alpha")
-        {
-            strKey = strKey.Substring(5, 1);
-        } */
-
         var lastData = dataStorer.read_data();
 
         lastData.keys[index] = key;
@@ -142,22 +122,6 @@ public class KeyBinder : MonoBehaviour
             bindings[i] = data.keys[i];
             KeyBindTexts[i].text = data.keys[i].ToString();
         }
-
-
-
-        /* for (int i = 0; i < data.Length; i++)
-        {
-            if (i >= 6 && i <= 12)
-            {
-                string strKey = data[i].Split(char.Parse(":"))[1];
-                bindings[i-6] = ToKeyCode(strKey);
-                if (strKey.Length > 5 && strKey.Substring(0, 5) == "Alpha")
-                {
-                    strKey = strKey.Substring(5, 1);
-                }
-                KeyBindTexts[i-6].text = strKey;
-            }
-        } */
     }
 
     public void resetBindings()
